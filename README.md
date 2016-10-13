@@ -114,11 +114,52 @@ Dividing the medium into little steps
 Precomputed probability it is determined whether a photon should be absorbed, scattered, or whether another step is necessary
 
 ## Three photon map
-Caustic photon map
++Caustic photon map
 
-Global photon map
++Global photon map
 
-Volum photon map
++Volum photon map
+
+TODO: understand matrix representation in above three different type of maps
+
+More photon tracing path should be performed for caustic photon map since it should be of high quality and therefore often needs
+more photons than the other two
+
+The construction of the photon maps is most easily achieved by using *two separate photon tracing steps?* (mentioned above?)
+
+TODO: The sequence shouldn't matter? 
+
+# Preparing the photon map for rendering
+Photons are only generated during the photon tracing pass, in the rendering pass the photon map is static data structure
+Incoming flux and reflected radiance at many points in the scene
+
+*To locate nearest photons in the photon map*
+
+Requirement for data-structure
+
++fast nearest neighbor searching
++handle highly non-uniform distribution --caustics photon map
+
+## Balanced kd-tree
+The time it takes to locaate one photon in a balanced kd-tree has a worst time performance:
+O(logN) N is the number of photons in the tree
+
+A balanced kd-tree can be represented using a heap like data structure
+
+(Array element 1 is the tree
+root, and element i has element 2i as left child and element 2i+ 1 as right child.)
+
+### Balancing
+
+*Splitting dimension*
+The choice of a splitting dimension is based on the distribution of points within the set.
+
+One might use either the variance or the maximum distance between the points as criterion
+
+The splitting dimension is thus chosen as the one which has the largest maximum distance between the points
+
+Complexity of balancing algorithm is O(NlogN)
+
 References:
 
 1. [Rejection sampling](https://en.wikipedia.org/wiki/Rejection_sampling)

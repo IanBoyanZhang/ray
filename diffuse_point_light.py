@@ -30,6 +30,7 @@ def emit_photons_from_diffuse_point_light():
         # Vector add
         # photons.append((x, y, z))
         # Normalized energy
+        # TODO: represent energy in RGB format
         photons.append(tuple(map(operator.add, p, (x, y, z, 1.0/NUM_OF_PHOTON))))
         break
     n_e += 1
